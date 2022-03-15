@@ -1,22 +1,20 @@
 import React,{ useState, useEffect } from "react";
-import { getAllChats } from "../service/api";
+import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
+
+
+import Login from "./authenticate/Login";
+import SignUp from "./authenticate/SignUp";
 
 function App()
 {
-  let [chats,setChats]=useState([]);
-
-  useEffect(()=>{
-    const fetchdata= async()=>{
-      let data=await getAllChats();
-      console.log(data);
-      setChats(data);
-    }
-    fetchdata();
-  },[chats]);
-
   return (
     <>
-      {chats[0]}
+      <Router>
+            <Routes>
+              <Route path="/login" element={<Login/>} />
+              <Route path="/signup" element={<SignUp/>} />
+            </Routes>
+      </Router>
     </>
   );
 }
