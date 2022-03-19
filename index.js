@@ -7,6 +7,7 @@ dotenv.config();
 //-------------components------------
 const userRoutes = require("./routes/userRoutes.js");
 const Connection = require("./database/db.js");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 //-----------------------------------
 const app = express();
@@ -19,6 +20,10 @@ Connection(URL);
 
 //------------Routing-----------------
 app.use("/api/user",userRoutes);
+
+//-----------Error Handling-----------
+app.use(notFound);
+app.use(errorHandler);
 
 
 app.listen(8000,function(){
